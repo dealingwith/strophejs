@@ -369,7 +369,7 @@ Strophe = {
     _makeGenerator: function () {
         var doc;
         if (typeof(Titanium) !== "undefined") {
-			doc = Titanium.XML.parseString("<strophe></strophe>");
+            doc = Titanium.XML.parseString("<strophe></strophe>");
         } else if (window.ActiveXObject) {
             doc = new ActiveXObject("Microsoft.XMLDOM");
             doc.appendChild(doc.createElement('strophe'));
@@ -1327,7 +1327,7 @@ Strophe.Request.prototype = {
         var xhr = null;
         
         if (typeof(Titanium) !== "undefined") {
-			xhr = Titanium.Network.createHTTPClient();
+            xhr = Titanium.Network.createHTTPClient();
         } else if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
             if (xhr.overrideMimeType) {
