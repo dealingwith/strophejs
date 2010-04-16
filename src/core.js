@@ -9,7 +9,8 @@
 /*global document, window, setTimeout, clearTimeout, console,
     XMLHttpRequest, ActiveXObject,
     Base64, MD5,
-    Strophe, $build, $msg, $iq, $pres */
+    Strophe, $build, $msg, $iq, $pres,
+    Titanium */
 
 /** File: strophe.js
  *  A JavaScript library for XMPP BOSH.
@@ -367,8 +368,9 @@ Strophe = {
      */
     _makeGenerator: function () {
         var doc;
-
-        if (window.ActiveXObject) {
+        if (typeof(Titanium) !== "undefined") {
+			doc = Titanium.XML.parseString("<strophe></strophe>");
+        } else if (window.ActiveXObject) {
             doc = new ActiveXObject("Microsoft.XMLDOM");
             doc.appendChild(doc.createElement('strophe'));
         } else {
@@ -1323,7 +1325,10 @@ Strophe.Request.prototype = {
     _newXHR: function ()
     {
         var xhr = null;
-        if (window.XMLHttpRequest) {
+        
+        if (typeof(Titanium) !== "undefined") {
+			xhr = Titanium.Network.createHTTPClient();
+        } else if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
             if (xhr.overrideMimeType) {
                 xhr.overrideMimeType("text/xml");
